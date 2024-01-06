@@ -1,67 +1,33 @@
-import { useState } from "react";
-import TopicsCoveredComponent from "./examples/TopicsCovered";
+import { useEffect, useState } from "react";
 
-// state management
 const App = () => {
-  const [counter, setCounter] = useState(0);
+  const [state, setState] = useState(0);
+  const [state2, setState2] = useState(100);
+  const [state3, setState3] = useState(200);
 
-  const incrementHandler = (event, value = 1) => {
-    setCounter(counter + value);
-  }
+  // const arg1 = () => {
+  //   console.log("Log on initial render", {state, state2, state3})
+  //   console.log("Log on every render when changes in state3 or state")
+  // }
+  // const arg2 = [state, state3];
 
-  const decrementHandler = (event, value = 1) => {
-    setCounter(counter - value);
-  }
+  // console.log("Component Re-renders;")
+  // useEffect(arg1, arg2);
 
-  // operation => INCR | DECR
-  const counterHandler = (event, value = 1, operation = "INCR") => {
-    let valueToAdd = value;
-    if (operation === "DECR") {
-      valueToAdd = -valueToAdd;
-    }
-    setCounter(counter + valueToAdd);
-  }
+  useEffect(() => {
+    console.log("Log on initial render", {state, state2, state3})
+    console.log("Log on every render when changes in state3 or state")
+  }, [state, state3]);
 
   return (
     <>
-      <TopicsCoveredComponent/>
-      
-      <h1>Counter Application</h1>
-      <div style={{ padding: 12 }}>
-        <span>Counter: {counter}</span>
-      </div>
-
-      {
-        counter < 0 
-          ?
-          <div style={{ padding: 12, background: "yellow" }}>
-            <span>*Value is negative</span>
-          </div>
-          :
-          <></>
-      }
-
-      <div className="action-btn" style={{ padding: 12 }}>
-
-        <button onClick={(event) => counterHandler(event, 1000, "INCR")}>
-          Increase by 1000
-        </button>
-
-        <button onClick={(event) => counterHandler(event, 2, "INCR")}>
-          Increase by 2
-        </button>
-
-        <button onClick={incrementHandler}>Increase by 1</button>
-        <button onClick={decrementHandler}>Decrease by 1</button>
-
-        <button onClick={function (event) {
-          counterHandler(event, 2, "DECR");
-        }}>Decrease by 2</button>
-
-        <button onClick={function (event) {
-          counterHandler(event, 1000, "DECR");
-        }}>Decrease by 1000</button>
-      </div>
+      <h1>Side Effects and useEffect Hook</h1>
+      <p>State: {state}</p>
+      <button onClick={() => setState(100)}>Update State</button>
+      <p>State2: {state2}</p>
+      <button onClick={() => setState2(200)}>Update State2</button>
+      <p>State3: {state3}</p>
+      <button onClick={() => setState3(300)}>Update State3</button>
     </>
   )
 }
