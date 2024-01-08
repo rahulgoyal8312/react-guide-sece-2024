@@ -5,6 +5,7 @@ const CursorComponent = () => {
 
     useEffect(() => {
         function handleMove(e) {
+            // console.log("Executing handle Move: ", e.clientX, e.clientY);
             setPosition({ x: e.clientX, y: e.clientY });
         }
         console.log("Adding Event Listener")
@@ -13,6 +14,7 @@ const CursorComponent = () => {
         return () => {
             console.log("Removing Event Listener");
             window.removeEventListener('pointermove', handleMove);
+            setPosition({ x: 0, y: 0 });
         };
     }, []);
 

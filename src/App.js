@@ -1,14 +1,29 @@
-import { useState } from 'react';
-import CursorComponent from './examples/cursor';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootComponent from "./page/root";
 
-export default function App() {
-  const [show, setShow] = useState(true);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootComponent/>,
+    children: [
+      {
+        path: "about",
+        element: <>Hello, React.</>
+      },
+      {
+        path: "contact",
+        element: <>Contact Us Here.</>
+      }
+    ]
+  }
+]);
 
+const App = () => {
   return (
-    <>
-      {show ? <CursorComponent /> : <p>Not Showing the component</p>}
-      <button onClick={e => setShow(e => !e)}>{show ? "Hide" : "Show"}</button>
-    </>
+    <RouterProvider router={router}>
+      <h1>Routing Concepts</h1>
+    </RouterProvider>
   )
 }
 
+export default App;
